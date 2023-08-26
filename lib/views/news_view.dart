@@ -3,6 +3,7 @@ import 'package:news_app/widgets/categories_list_view.dart';
 import 'package:news_app/widgets/category_card.dart';
 import 'package:news_app/widgets/news_list_view.dart';
 import 'package:news_app/widgets/news_tile.dart';
+import 'package:news_app/services/news_service.dart';
 
 class NewsView extends StatelessWidget {
   const NewsView({super.key});

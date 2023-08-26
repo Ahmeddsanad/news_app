@@ -5,10 +5,10 @@ import 'package:news_app/models/article_model.dart';
 class NewsTile extends StatelessWidget {
   const NewsTile({
     super.key,
-    // required this.articleModel,
+    required this.articleModel,
   });
 
-  // final ArticleModel articleModel;
+  final ArticleModel articleModel;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -17,7 +17,8 @@ class NewsTile extends StatelessWidget {
         ClipRRect(
             borderRadius: BorderRadius.circular(6),
             child: Image.network(
-              'https://plus.unsplash.com/premium_photo-1673306778968-5aab577a7365?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
+              articleModel.image ??
+                  'https://cdn.vectorstock.com/i/preview-1x/65/30/default-image-icon-missing-picture-page-vector-40546530.jpg',
               height: 200,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -26,7 +27,7 @@ class NewsTile extends StatelessWidget {
           height: 12,
         ),
         Text(
-          'this is dfkmbmdfkigdmfgdfgdfgdfggdfgf',
+          articleModel.title,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(
@@ -39,7 +40,7 @@ class NewsTile extends StatelessWidget {
           height: 8,
         ),
         Text(
-          'djfgdfknkgdfnkbndnbdfbdfnbodnolfbndfbdfnbdolnbodfnbdfbodnbod',
+          articleModel.subTitle ?? 'There\'s no subtitle',
           maxLines: 2,
           style: const TextStyle(color: Colors.grey, fontSize: 14),
         )

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/models/article_model.dart';
+import 'package:news_app/widgets/NewsListViewBuilder.dart';
 import 'package:news_app/widgets/categories_list_view.dart';
 import 'package:news_app/widgets/category_card.dart';
 import 'package:news_app/widgets/news_list_view.dart';
@@ -46,7 +48,7 @@ class NewsView extends StatelessWidget {
                 height: 32,
               ),
             ),
-            NewsListView(),
+            NewsListViewBuilder(),
           ],
         ),
       ),

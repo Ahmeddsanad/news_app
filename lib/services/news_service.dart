@@ -6,7 +6,7 @@ class NewsServices {
 
   Future<List<ArticleModel>> getNews() async {
     final response = await dio.get(
-        'https://newsapi.org/v2/top-headlines?apiKey=8cf0ab8b4fa8438990ae6171e83c225b&country=us&category=sports');
+        'https://newsapi.org/v2/top-headlines?apiKey=8cf0ab8b4fa8438990ae6171e83c225b&country=us&category=general');
 
     // print(response.data);
 

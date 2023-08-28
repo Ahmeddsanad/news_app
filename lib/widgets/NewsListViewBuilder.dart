@@ -32,8 +32,31 @@ class _NewsListViewBuilderState extends State<NewsListViewBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return isLoading
-        ? SliverToBoxAdapter(
+    return FutureBuilder(
+      future: NewsServices().getNews(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return NewsListView(
+            articles: snapshot.data ?? [],
+          );
+        } else if (snapshot.hasError) {
+          return SliverToBoxAdapter(
+            child: Container(
+              height: 350,
+              width: 150,
+              child: const Center(
+                child: Text(
+                  'Oops!, There was an error please try again.',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
+                ),
+              ),
+            ),
+          );
+        } else {
+          return SliverToBoxAdapter(
             child: Container(
               height: 350,
               width: 150,
@@ -42,25 +65,42 @@ class _NewsListViewBuilderState extends State<NewsListViewBuilder> {
                 color: Colors.amber,
               )),
             ),
-          )
-        : articles.isNotEmpty
-            ? NewsListView(
-                articles: articles,
-              )
-            : SliverToBoxAdapter(
-                child: Container(
-                  height: 350,
-                  width: 150,
-                  child: const Center(
-                    child: Text(
-                      'Oops!, There was an error please try again.',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
-                ),
-              );
+          );
+        }
+      },
+    );
   }
 }
+
+
+
+// return isLoading
+    //     ? SliverToBoxAdapter(
+    //         child: Container(
+    //           height: 350,
+    //           width: 150,
+    //           child: const Center(
+    //               child: CircularProgressIndicator(
+    //             color: Colors.amber,
+    //           )),
+    //         ),
+    //       )
+    //     : articles.isNotEmpty
+    //         ? NewsListView(
+    //             articles: articles,
+    //           )
+    //         : SliverToBoxAdapter(
+    //             child: Container(
+    //               height: 350,
+    //               width: 150,
+    //               child: const Center(
+    //                 child: Text(
+    //                   'Oops!, There was an error please try again.',
+    //                   style: TextStyle(
+    //                     fontWeight: FontWeight.bold,
+    //                     fontSize: 20.0,
+    //                   ),
+    //                 ),
+    //               ),
+    //             ),
+    //           );

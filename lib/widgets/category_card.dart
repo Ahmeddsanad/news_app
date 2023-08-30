@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/models/category_model.dart';
+import 'package:news_app/views/category_view.dart';
 
 class CategoryCard extends StatelessWidget {
   CategoryCard({super.key, required this.category});
@@ -8,41 +9,50 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 140,
-      width: 200,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.0),
-        // color: Colors.red,
-        color: Colors.black.withOpacity(0.9),
-        boxShadow: const [
-          BoxShadow(
-            blurRadius: 3,
-            spreadRadius: 2,
-            color: Colors.black38,
-          ),
-        ],
-        image: DecorationImage(
-          fit: BoxFit.fill,
-          colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.3),
-            BlendMode.darken,
-          ),
-          image: AssetImage(
-            'assets/${category.image}',
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return CategoryView(
+            category: category.categoryName,
+          );
+        }));
+      },
+      child: Container(
+        height: 140,
+        width: 200,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.0),
+          // color: Colors.red,
+          color: Colors.black.withOpacity(0.9),
+          boxShadow: const [
+            BoxShadow(
+              blurRadius: 3,
+              spreadRadius: 2,
+              color: Colors.black38,
+            ),
+          ],
+          image: DecorationImage(
+            fit: BoxFit.fill,
+            colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.3),
+              BlendMode.darken,
+            ),
+            image: AssetImage(
+              'assets/${category.image}',
+            ),
           ),
         ),
+        child: Center(
+            child: Text(
+          category.categoryName,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic,
+            fontSize: 16,
+          ),
+        )),
       ),
-      child: Center(
-          child: Text(
-        category.categoryName,
-        style: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontStyle: FontStyle.italic,
-          fontSize: 16,
-        ),
-      )),
     );
   }
 }

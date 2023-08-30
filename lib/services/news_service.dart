@@ -4,10 +4,12 @@ import 'package:news_app/models/article_model.dart';
 class NewsServices {
   final dio = Dio();
 
-  Future<List<ArticleModel>> getNews() async {
+  Future<List<ArticleModel>> getNews({
+    required String category,
+  }) async {
     try {
       final response = await dio.get(
-          'https://newsapi.org/v2/top-headlines?apiKey=8cf0ab8b4fa8438990ae6171e83c225b&country=us&category=general');
+          'https://newsapi.org/v2/top-headlines?apiKey=8cf0ab8b4fa8438990ae6171e83c225b&country=us&category=$category');
 
       // print(response.data);
 
@@ -20,8 +22,9 @@ class NewsServices {
       for (var article in articles) {
         ArticleModel articleModel = ArticleModel(
           image: article['urlToImage'],
-          title: article['title'],
+          title: article['title'] ?? 'there is no title here.',
           subTitle: article['description'],
+          url: article['url'],
         );
         articlesList.add(articleModel);
       }

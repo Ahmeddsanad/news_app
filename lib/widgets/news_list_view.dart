@@ -5,11 +5,11 @@ import 'package:news_app/widgets/news_tile.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class NewsListView extends StatelessWidget {
-  List<ArticleModel> articles = [];
-
   NewsListView({
     required this.articles,
   });
+
+  List<ArticleModel> articles;
 
   @override
   Widget build(BuildContext context) {

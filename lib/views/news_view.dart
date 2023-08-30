@@ -15,7 +15,6 @@ class NewsView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -48,7 +47,9 @@ class NewsView extends StatelessWidget {
                 height: 32,
               ),
             ),
-            NewsListViewBuilder(),
+            NewsListViewBuilder(
+              category: 'general',
+            ),
           ],
         ),
       ),

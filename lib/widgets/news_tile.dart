@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/models/article_model.dart';
+import 'package:news_app/views/web_view.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 // cached network image
 class NewsTile extends StatelessWidget {
@@ -14,15 +16,28 @@ class NewsTile extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        ClipRRect(
+        InkWell(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(
+              builder: (context) {
+                return WebView(
+                  urlArticle: articleModel.url ?? 'about:blank',
+                  title: articleModel.title,
+                );
+              },
+            ));
+          },
+          child: ClipRRect(
             borderRadius: BorderRadius.circular(6),
             child: Image.network(
               articleModel.image ??
-                  'https://cdn.vectorstock.com/i/preview-1x/65/30/default-image-icon-missing-picture-page-vector-40546530.jpg',
+                  'https://liftlearning.com/wp-content/uploads/2020/09/default-image.png',
               height: 200,
               width: double.infinity,
               fit: BoxFit.cover,
-            )),
+            ),
+          ),
+        ),
         const SizedBox(
           height: 12,
         ),
@@ -43,7 +58,7 @@ class NewsTile extends StatelessWidget {
           articleModel.subTitle ?? 'There\'s no subtitle',
           maxLines: 2,
           style: const TextStyle(color: Colors.grey, fontSize: 14),
-        )
+        ),
       ],
     );
   }

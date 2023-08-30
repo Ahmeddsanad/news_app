@@ -4,42 +4,52 @@ import 'package:news_app/services/news_service.dart';
 import 'package:news_app/widgets/news_list_view.dart';
 
 class NewsListViewBuilder extends StatefulWidget {
-  const NewsListViewBuilder({
-    super.key,
-  });
+  const NewsListViewBuilder({super.key, required this.category});
+
+  final String category;
 
   @override
   State<NewsListViewBuilder> createState() => _NewsListViewBuilderState();
 }
 
 class _NewsListViewBuilderState extends State<NewsListViewBuilder> {
-  bool isLoading = true;
+  // bool isLoading = true;
 
-  List<ArticleModel> articles = [];
+  // List<ArticleModel> articles = [];
+
+  // @override
+  // void initState() {
+  //   super.initState();
+
+  //   getGeneralMethod();
+  // }
+
+  // Future<void> getGeneralMethod() async {
+  //   articles = await NewsServices().getNews();
+  //   isLoading = false;
+  //   setState(() {});
+  // }
+
+  var future;
 
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
-
-    getGeneralMethod();
-  }
-
-  Future<void> getGeneralMethod() async {
-    articles = await NewsServices().getNews();
-    isLoading = false;
-    setState(() {});
+    future = NewsServices().getNews(category: widget.category);
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: NewsServices().getNews(),
+    return FutureBuilder<List<ArticleModel>>(
+      future: future,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return NewsListView(
             articles: snapshot.data ?? [],
           );
         } else if (snapshot.hasError) {
+          print(snapshot.error);
           return SliverToBoxAdapter(
             child: Container(
               height: 350,

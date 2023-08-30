@@ -31,7 +31,7 @@ class _SettingsViewState extends State<SettingsView> {
                 boxShadow: [
                   BoxShadow(
                     blurRadius: 5,
-                    spreadRadius: 1,
+                    spreadRadius: 0.5,
                     color: Colors.black,
                   ),
                 ],

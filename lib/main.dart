@@ -3,6 +3,7 @@ import 'package:news_app/services/news_service.dart';
 import 'package:news_app/services/provider.dart';
 import 'package:news_app/themes/darkmode_style.dart';
 import 'package:news_app/views/news_view.dart';
+import 'package:news_app/views/splash_screen.dart';
 import 'package:news_app/widgets/navigationBar.dart';
 import 'package:provider/provider.dart';
 
@@ -43,7 +44,7 @@ class _NewsAppState extends State<NewsApp> {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: Styles.themeData(themeChangeProvider.darkTheme, context),
-            home: navigationBar(),
+            home: SplashScreen(),
           );
         },
       ),
